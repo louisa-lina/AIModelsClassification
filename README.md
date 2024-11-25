@@ -2,6 +2,8 @@
 
 This project involves the analysis of CIFAR-10 image dataset using multiple machine learning and deep learning models. The main goal is to compare the performance of various models (Naive Bayes, Decision Tree, MLP variants, and CNN) in terms of accuracy, precision, recall, F1-score, and confusion matrices.
 
+**IMPORTANT**: Due to the large size of the models for the CNN they have been stored in Google Drive and can be accessed [here](https://drive.google.com/drive/folders/1hVRO0UWX01fnux2EFVApngWGwpbueJ0t?usp=sharing)
+
 ---
 
 ## How to Run the Project
