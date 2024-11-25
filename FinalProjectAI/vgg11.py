@@ -128,6 +128,8 @@ class CustomVGGWithKernels(nn.Module):
 
 # Train and evaluate VGG model
 # Train and evaluate VGG model
+
+
 def train_and_evaluate_vgg(trainloader, testloader, device, write_to_file, name="Base VGG11", extra_layers=0):
     print(f"\nTraining and evaluating {name}...")
 
@@ -191,7 +193,7 @@ def train_and_evaluate_vgg(trainloader, testloader, device, write_to_file, name=
     test_precision, test_recall, test_f1, _ = precision_recall_fscore_support(test_labels, test_preds, average='macro')
 
     # Generate and write the summary table for both training and testing
-    generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f1, test_acc, test_precision, test_recall, test_f1, write_to_file)
+    generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f1, test_acc, test_precision, test_recall, test_f1, write_to_file,name)
 
     # Generate and save the confusion matrix for testing data
     target_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
@@ -278,7 +280,7 @@ def train_and_evaluate_vgg_with_kernels(
     test_precision, test_recall, test_f1, _ = precision_recall_fscore_support(test_labels, test_preds, average='macro')
 
     # Generate and write the summary table for both training and testing
-    generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f1, test_acc, test_precision, test_recall, test_f1, write_to_file)
+    generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f1, test_acc, test_precision, test_recall, test_f1, write_to_file,name)
 
     # Generate and save the confusion matrix for testing data
     target_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
@@ -296,12 +298,12 @@ def train_and_evaluate_vgg_with_kernels(
 
 
 def generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f1,
-                                test_acc, test_precision, test_recall, test_f1, write_to_file):
+                                test_acc, test_precision, test_recall, test_f1, write_to_file, model_name):
     """
     Generate and write the summary table to the results file for both training and testing data.
     """
     table_header = (
-        f"\n=== VGG11 Summary Table ===\n"
+        f"\n=== {model_name} Summary Table ===\n"
         f"{'Metric':<15}{'Train':<10}{'Test':<10}\n"
         f"{'-' * 35}\n"
     )
@@ -314,7 +316,3 @@ def generate_vgg_summary_table(train_acc, train_precision, train_recall, train_f
     table = table_header + table_body
     print(table)
     write_to_file(table)
-
-
-
-
