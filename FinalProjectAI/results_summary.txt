@@ -3,6 +3,24 @@
 
 === Naive Bayes Results ===
 
+=== Custom Gaussian Naive Bayes Results ===
+Metric         Train     Test      
+-----------------------------------
+Accuracy       0.8162    0.7920    
+Precision      0.8192    0.7974    
+Recall         0.8162    0.7920    
+F1-Score       0.8165    0.7925    
+
+
+=== Scikit-Learn Gaussian Naive Bayes Results ===
+Metric         Train     Test      
+-----------------------------------
+Accuracy       0.8162    0.7920    
+Precision      0.8192    0.7974    
+Recall         0.8162    0.7920    
+F1-Score       0.8165    0.7925    
+
+
 === Decision Tree Results ===
 
 === Custom Decision Tree Results (Depth: 10) ===
