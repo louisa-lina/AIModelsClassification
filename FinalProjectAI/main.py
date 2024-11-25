@@ -87,35 +87,21 @@ def train_and_evaluate_naive_bayes(train_features, train_labels, test_features, 
     else:
         print("Loaded Custom Gaussian Naive Bayes from file.")
 
-    # Predictions and Metrics for Training
-    custom_train_preds = custom_gnb.predict(train_features)
-    train_accuracy = accuracy_score(train_labels, custom_train_preds)
-    train_precision, train_recall, train_f1, _ = precision_recall_fscore_support(
-        train_labels, custom_train_preds, average='macro'
-    )
-
     # Predictions and Metrics for Testing
     custom_test_preds = custom_gnb.predict(test_features)
-    test_accuracy = accuracy_score(test_labels, custom_test_preds)
-    test_precision, test_recall, test_f1, _ = precision_recall_fscore_support(
-        test_labels, custom_test_preds, average='macro'
-    )
 
-    # Summary Table for Custom Naive Bayes
-    table_header = (
-        f"\n=== Custom Gaussian Naive Bayes Results ===\n"
-        f"{'Metric':<15}{'Train':<10}{'Test':<10}\n"
-        f"{'-'*40}\n"
-    )
-    table_body = (
-        f"{'Accuracy':<15}{train_accuracy:<10.4f}{test_accuracy:<10.4f}\n"
-        f"{'Precision':<15}{train_precision:<10.4f}{test_precision:<10.4f}\n"
-        f"{'Recall':<15}{train_recall:<10.4f}{test_recall:<10.4f}\n"
-        f"{'F1-Score':<15}{train_f1:<10.4f}{test_f1:<10.4f}\n"
-    )
-    table = table_header + table_body
-    print(table)
-    write_to_file(table)
+    # Generate and Save Confusion Matrix for Custom Naive Bayes
+    cm = confusion_matrix(test_labels, custom_test_preds)
+    target_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+    plt.figure(figsize=(10, 7))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=target_names, yticklabels=target_names)
+    plt.title("Custom Gaussian Naive Bayes Confusion Matrix")
+    plt.xlabel("Predicted")
+    plt.ylabel("True")
+    filename = "custom_naive_bayes_confusion_matrix.png"
+    plt.savefig(filename)
+    plt.close()
+    print(f"Saved Custom Gaussian Naive Bayes confusion matrix as '{filename}'")
 
     # Scikit-Learn Gaussian Naive Bayes
     sklearn_model_filename = "sklearn_naive_bayes.pkl"
@@ -128,37 +114,21 @@ def train_and_evaluate_naive_bayes(train_features, train_labels, test_features, 
     else:
         print("Loaded Scikit-Learn Gaussian Naive Bayes from file.")
 
-    # Predictions and Metrics for Training
-    sklearn_train_preds = sklearn_gnb.predict(train_features)
-    train_accuracy = accuracy_score(train_labels, sklearn_train_preds)
-    train_precision, train_recall, train_f1, _ = precision_recall_fscore_support(
-        train_labels, sklearn_train_preds, average='macro'
-    )
-
     # Predictions and Metrics for Testing
     sklearn_test_preds = sklearn_gnb.predict(test_features)
-    test_accuracy = accuracy_score(test_labels, sklearn_test_preds)
-    test_precision, test_recall, test_f1, _ = precision_recall_fscore_support(
-        test_labels, sklearn_test_preds, average='macro'
-    )
 
-    # Summary Table for Scikit-Learn Naive Bayes
-    table_header = (
-        f"\n=== Scikit-Learn Naive Bayes Results ===\n"
-        f"{'Metric':<15}{'Train':<10}{'Test':<10}\n"
-        f"{'-'*40}\n"
-    )
-    table_body = (
-        f"{'Accuracy':<15}{train_accuracy:<10.4f}{test_accuracy:<10.4f}\n"
-        f"{'Precision':<15}{train_precision:<10.4f}{test_precision:<10.4f}\n"
-        f"{'Recall':<15}{train_recall:<10.4f}{test_recall:<10.4f}\n"
-        f"{'F1-Score':<15}{train_f1:<10.4f}{test_f1:<10.4f}\n"
-    )
-    table = table_header + table_body
-    print(table)
-    write_to_file(table)
+    # Generate and Save Confusion Matrix for Scikit-Learn Naive Bayes
+    cm = confusion_matrix(test_labels, sklearn_test_preds)
+    plt.figure(figsize=(10, 7))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=target_names, yticklabels=target_names)
+    plt.title("Scikit-Learn Gaussian Naive Bayes Confusion Matrix")
+    plt.xlabel("Predicted")
+    plt.ylabel("True")
+    filename = "sklearn_naive_bayes_confusion_matrix.png"
+    plt.savefig(filename)
+    plt.close()
+    print(f"Saved Scikit-Learn Gaussian Naive Bayes confusion matrix as '{filename}'")
 
-# Train and evaluate Decision Tree
 # Train and evaluate Decision Tree
 def train_and_evaluate_decision_tree(train_features, train_labels, test_features, test_labels):
     print("\nTraining and evaluating Decision Tree classifiers...")
