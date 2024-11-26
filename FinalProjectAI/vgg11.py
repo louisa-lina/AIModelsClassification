@@ -127,8 +127,6 @@ class CustomVGGWithKernels(nn.Module):
         return x
 
 # Train and evaluate VGG model
-# Train and evaluate VGG model
-
 
 def train_and_evaluate_vgg(trainloader, testloader, device, write_to_file, name="Base VGG11", extra_layers=0):
     print(f"\nTraining and evaluating {name}...")
